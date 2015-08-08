@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<html>
+  <head>
+    <title>{% block title %}Untitled{% endblock %}</title>
+  </head>
+  <body>
+    {% if messages %}
+      <h3>Messages</h3>
+      <ul>
+        {% for message in messages %}
+          <li>{{ message|safe }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block content %}<p>This space for rent.</p>{% endblock %}
+
+    <hr>
+    <img src="{% static 'img/agbdunderconstruction7.gif' %}" />
+  </body>
+</html>

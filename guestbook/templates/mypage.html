@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}My page{% endblock %}
+
+{% block content %}
+  <h1>My page</h1>
+
+  {% with comments_count=comments.count %}
+    {% if comments_count %}
+      <h3>Other visitors have left these messages:</h3>    
+
+      <table border="1">
+        <tr>
+          <th>Name</th>
+          <th>Created</th>
+          <th>Says</th>
+        </tr>
+        {% for comment in comments %}
+          <tr>
+            <td>{{ comment.name }}</td>
+            <td>{{ comment.created }} ({{ comment.created|timesince }} ago)</td>
+            <td>{{ comment.comment }}</td>
+          </tr>
+        {% endfor %}
+      </table>
+        
+      <p>{{ comments_count }} {{ comments_count|pluralize:"entry,entries" }}.</p>
+        
+      <h3>Tell us what you think!</h3>
+    {% else %}
+      <h3>Be the first to leave a comment!</h3>
+    {% endif %}
+  {% endwith %}
+    
+  <form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+  
+    <input type="submit" value="Save" />
+  </form>
+{% endblock %}
