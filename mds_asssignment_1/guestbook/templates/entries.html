@@ -4,7 +4,7 @@
   {% for entry in entry_list %}
     <div class='comment'>
       <p class="entry-name">{{ entry.fname }} {{ entry.lname }}</p>
-      <p class="entry-age">{{ entry.age }}</p>
+      <p class="entry-age">{{ entry.date|timesince }}</p>
       <p class="entry-comment">{{ entry.comment }}</p>
     </div>
   {% endfor %}
