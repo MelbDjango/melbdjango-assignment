@@ -16,6 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from guestbook import urls as guestbook_urls
+
 urlpatterns = [
+    url(r'^', include(guestbook_urls)),
     url(r'^admin/', include(admin.site.urls)),
 ]

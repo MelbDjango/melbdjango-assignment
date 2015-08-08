@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% for entry in entry_list %}
+    <li>
+      <p>{{ entry.fname }} {{ entry.lname }}</p>
+      <p>{{ entry.comment }}</p>
+    </li>
+  {% endfor %}
+{% endblock %}
