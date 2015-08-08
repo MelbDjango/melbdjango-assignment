@@ -2,9 +2,10 @@
 
 {% block content %}
   {% for entry in entry_list %}
-    <li>
-      <p>{{ entry.fname }} {{ entry.lname }}</p>
-      <p>{{ entry.comment }}</p>
-    </li>
+    <div class='comment'>
+      <p class="entry-name">{{ entry.fname }} {{ entry.lname }}</p>
+      <p class="entry-age">{{ entry.age }}</p>
+      <p class="entry-comment">{{ entry.comment }}</p>
+    </div>
   {% endfor %}
 {% endblock %}
