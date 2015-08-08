@@ -6,7 +6,7 @@ def home(request):
     return entries(request)
 
 def entries(request):
-    entry_list = Entry.objects.all().order_by('date').reverse()
+    entry_list = Entry.objects.all().filter(visible=True).order_by('date').reverse()
     return render(request, 'entries.html', {
         'entry_list': entry_list,
     })
