@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  {% if thankyou %}
+    <h2 style="text-align: center;">Thanks for making a post {{ thankyou }}!</h2>
+  {% endif %}
+  {% for entry in entry_list %}
+    <div class="comment">
+      <p class="entry-name">{{ entry.fname }} {{ entry.lname }}</p>
+      <p class="entry-age">{{ entry.date|timesince }}</p>
+      <p class="entry-comment">{{ entry.comment }}</p>
+    </div>
+  {% endfor %}
+  <p style="text-align: center;">{{ entry_list.count }} post{{ entry_list.count|pluralize }}</p>
+  {% if not thankyou %}
+  <div class="entry-form">
+    <h3>Leave your own comment!</h3>
+      <form method="POST">
+        {% csrf_token %}
+        {{ entry_form.as_p }}
+        <input type="submit" value="Post!">
+      </form>
+  </div>
+  {% endif %}
+{% endblock %}

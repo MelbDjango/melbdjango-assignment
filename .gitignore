@@ -79,4 +79,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+# Databases
+*.sqlite3
 
+# Swap files
+*.swp
