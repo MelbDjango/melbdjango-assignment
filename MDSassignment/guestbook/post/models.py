@@ -16,6 +16,7 @@ class Post(models.Model):
 
 
 	def __str__(self):
+		#I just copied this format from the timetracker example, not sure if it is required...
 		return '{} {}'.format(self.name, self.text)
 
 
