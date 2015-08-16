@@ -18,7 +18,7 @@ def post_page(request):
 	else:
 		form = PostForm()
 
-	posts = Post.objects.all().order_by('time')
+	posts = Post.objects.filter(status='p').order_by('time')
 	tally = Post.objects.count()
 	return render(request, 'post/post_page.html', {
 		'posts':posts,
