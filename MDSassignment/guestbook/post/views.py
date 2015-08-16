@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib import messages
 from .models import Post 
 from .forms import PostForm
+import time
+from django.utils import timezone
 
 # Create your views here.
 def post_page(request):
@@ -9,7 +11,6 @@ def post_page(request):
 		form = PostForm(request.POST)
 		if form.is_valid():
 			posts = Post()
-			#there is a problem here - form has no attribute 'name'
 			posts.name = form.cleaned_data['name']
 			posts.text = form.cleaned_data['text']
 			posts.email = form.cleaned_data['email']

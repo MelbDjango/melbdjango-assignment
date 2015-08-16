@@ -19,9 +19,6 @@ class Post(models.Model):
 		self.save()
 
 
-	def count_post(self):
-		pass
-
 	def __str__(self):
 		return '{} {}'.format(self.name, self.text)
 
