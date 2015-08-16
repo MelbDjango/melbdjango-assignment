@@ -37,6 +37,9 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'foundation',
+    'register',
+    'comments',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -55,7 +58,9 @@ ROOT_URLCONF = 'guestbook.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates')
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -70,6 +75,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'guestbook.wsgi.application'
 
+LOGIN_REDIRECT_URL = '/'
 
 # Database
 # https://docs.djangoproject.com/en/1.8/ref/settings/#databases
@@ -100,3 +106,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+    os.path.abspath(BASE_DIR + '/static/'),
+)
