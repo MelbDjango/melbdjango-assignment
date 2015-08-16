@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.contrib import messages
 from .models import Post 
 from .forms import PostForm
 
@@ -12,14 +13,14 @@ def post_page(request):
 			posts.name = form.cleaned_data['name']
 			posts.text = form.cleaned_data['text']
 			posts.email = form.cleaned_data['email']
-			#posts.time = form.cleaned_data['time']
 			posts.save()
+			messages.success(request, 'Thank you for posting.')
 			return redirect('post_page')
 	else:
 		form = PostForm()
 
-	posts = Post.objects.filter(status='p').order_by('time')
-	tally = Post.objects.count()
+	posts = Post.objects.filter(status='p').order_by('-time')
+	tally = Post.objects.filter(status='p').count()
 	return render(request, 'post/post_page.html', {
 		'posts':posts,
 		'form': form,

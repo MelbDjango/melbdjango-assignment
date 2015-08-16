@@ -7,7 +7,7 @@ hide_post.short_description = "Hide this post"
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'text']
+    list_display = ['name', 'status', 'text', 'email', 'time']
     ordering = ['time']
     actions = [hide_post]
 
