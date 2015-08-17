@@ -4,16 +4,19 @@ from django.views.generic.edit import FormMixin
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.core.urlresolvers import reverse_lazy
 from django.contrib.auth.decorators import login_required
+from django.contrib.messages.views import SuccessMessageMixin
+from django.utils import timezone
 
 from .models import Comment, Message
 from .forms import AddMessageForm, CreateCommentForm
 
 
-class AllCommentList(CreateView):
+class AllCommentList(SuccessMessageMixin, CreateView):
     model = Comment
     template_name = 'public_comments_list.html'
     form_class = AddMessageForm
     context_object_name = 'comments'
+    success_message = "Message was created successfully"
 
     def form_valid(self, form):
         comment_id = self.request.POST['comment_id']
@@ -24,6 +27,7 @@ class AllCommentList(CreateView):
     def get_context_data(self, **kwargs):
         context = super(AllCommentList, self).get_context_data(**kwargs)
         context['comments'] = self.model.objects.filter(is_active=True).filter(is_public=True)
+
         return context
 
     def get_success_url(self):

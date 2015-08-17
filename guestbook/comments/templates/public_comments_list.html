@@ -2,6 +2,13 @@
 
 {% block content %}
 
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 
     <hr>
     <div class="large-12 columns">
@@ -15,23 +22,37 @@
         <hr>
         {% for comment in comments %}
             <div class="row">
-                <div class="large-2 columns small-3"><p><strong>{{ comment.author }}</strong></p><img src="http://placehold.it/80x80&text=[img]"/></div>
+                <div class="large-2 columns small-3">
+                    <img src="http://placehold.it/80x80&text=[img]"/>
+                </div>
                 <div class="large-10 columns">
-                    <p><strong>{{ comment.title }}:</strong>{{ comment.text}}</p>
-                    {% if not user.is_anonymous %}
-                        <ul class="inline-list">
-                            <li><a href="" data-reveal-id="AddMessage" onclick="javascript:setid({{comment.pk}}); return false;">Add Message</a></li>
-                        </ul>
+                    <ul class="breadcrumbs">
+                        <li><strong>{{ comment.author }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; post created {{ comment.long_ago }}.</li>
+                    </ul>
+                    {{ comment.text }}
+                    <hr>
+                    <p><strong>
+                    {% if comment.message_set.count > 0 %}
+                        {{ comment.message_set.count }} message{{ comment.message_set.count|pluralize }} left.
+                    {% else %}
+                        No messages left yet.
                     {% endif %}
-
+                    </strong>
+                    </p>
 
                     {% for message in comment.message_set.all %}
-                    <div class="row">
-                        <div class="large-2 columns small-3"><p><strong>{{ message.user }}</strong></p><img src="http://placehold.it/50x50&text=[img]"/></div>
-                        <div class="large-10 columns"><p>{{ message.text }}</p></div>
-                    </div>
-                    <hr>
-                    {% endfor %}
+                   <div class="row">
+                       <div class="small-11 small-centered columns">
+                           <ul class="breadcrumbs">
+                               <li><strong>{{ message.user }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; message sent {{ message.long_ago }}.</li>
+                           </ul>
+                           <p>{{ message.text }}</p>
+                       </div>
+                   </div>
+                   {% endfor %}
+                   {% if not user.is_anonymous %}
+                        <a href="" class="button round small info" data-reveal-id="AddMessage" onclick="javascript:setid({{comment.pk}}); return false;">Add Message</a>
+                    {% endif %}
                 </div>
             </div>
             <hr>
