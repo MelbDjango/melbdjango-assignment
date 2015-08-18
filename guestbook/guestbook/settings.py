@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     'foundation',
     'register',
     'comments',
@@ -110,3 +111,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.abspath(BASE_DIR + '/static/'),
 )
+
+GRAPH_MODELS = {
+    'all_applictions': True,
+    'group_models': True,
+}
