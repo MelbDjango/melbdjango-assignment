@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <hr>
+    <div class="large-12 columns">
+
+        <h3>Hi {{user}}, here are your posts</h3><a href="#" class="button round small info" data-reveal-id="CreateComment">Click here to create new Comment</a>
+        <hr>
+        {% for comment in comments %}
+            <div class="row">
+                <div class="large-2 columns small-3">
+                    <img src="http://placehold.it/80x80&text=[img]"/>
+                    <p>TODO - Make public: </p>
+                    <div class="switch round small">
+                        <input id="exampleRadioSwitch3" type="checkbox" checked name="testGroup">
+                        <label for="exampleRadioSwitch3">TODO - Make public</label>
+                    </div>
+                </div>
+                <div class="large-10 columns">
+                    <ul class="breadcrumbs">
+                        <li>your post was created {{ comment.long_ago }}.</li>
+                        <li><a href="{% url 'comments_edit' comment.pk %}">edit</a></li>
+                        <li><a href="{% url 'comments_delete' comment.pk %}">delete</a></li>
+                    </ul>
+                    {{ comment.text }}
+                    <hr>
+                    <p><strong>
+                    {% if comment.message_set.count > 0 %}
+                        {{ comment.message_set.count }} message{{ comment.message_set.count|pluralize }} left.
+                    {% else %}
+                        No messages left yet.
+                    {% endif %}
+                    </strong>
+                    </p>
+
+                    {% for message in comment.message_set.all %}
+                    <div class="row">
+                        <div class="small-11 small-centered columns">
+                           <ul class="breadcrumbs">
+                               <li><strong>{{ message.user }}</strong> &nbsp;&nbsp;&nbsp;&nbsp;| &nbsp;&nbsp;&nbsp;&nbsp; message sent {{ message.long_ago }}.</li>
+                           </ul>
+                           <p>{{ message.text }}</p>
+                       </div>
+                   </div>
+                   {% endfor %}
+                   {% if not user.is_anonymous %}
+                        <a href="" class="button round small info" data-reveal-id="AddMessage" onclick="javascript:setid({{comment.pk}}); return false;">Add Message</a>
+                    {% endif %}
+                </div>
+            </div>
+            <hr>
+        {% endfor %}
+
+    <div id="CreateComment" class=reveal-modal data-reveal aria-labelledby="Create New Comment" aria-hidden="true" role="dialog">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <p>
+              <button type="submit">
+                Submit
+              </button>
+            </p>
+        </form>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
+{% endblock %}
