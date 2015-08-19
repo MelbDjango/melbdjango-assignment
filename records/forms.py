@@ -8,7 +8,6 @@ class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
         fields=('name','comment','email_address')
-        confirm_email = forms.CharField(max_length=200)
 
     # Double check email confirmation
     confirm_email = forms.CharField(max_length=200)

@@ -7,7 +7,7 @@ class Record(models.Model):
     class Meta:
         verbose_name_plural = 'records'
 
-    DATE_FORMAT = ('you@example.com')
+    DATE_FORMAT = ('*option')
 
     name = models.CharField(max_length=200)
     comment = models.CharField(max_length=2000)
