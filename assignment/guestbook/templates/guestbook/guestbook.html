@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Guestbook</h1>
+<h2>New Post</h2>
+{% load crispy_forms_tags %}
+<form action="" method="post">{% csrf_token %}
+    {{ form | crispy }}
+    <input type="submit" value="Post" />
+</form>
+
+<hr>
+
+<h2>Posts</h2>
+{% autoescape on %}
+{% for post in post_list %}
+<div class="row">
+    <div class="col-md-12">
+        <p><strong>Name:</strong> {{ post.name }}</p>
+        <p><strong>Date:</strong> {{ post.created_at }}</p>
+        <p>{{ post.text }}</p>
+    </div>
+</div>
+<hr>
+{% empty %}
+<div class="row">
+    <div class="col-md-12">
+      <em>No posts.</em>
+    </div>
+</div>
+{% endfor %}
+<p>{{ post_count }} posts.</p>
+{% endautoescape %}
+{% endblock %}
+
