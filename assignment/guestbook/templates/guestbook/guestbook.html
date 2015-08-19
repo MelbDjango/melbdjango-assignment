@@ -2,34 +2,47 @@
 
 {% block content %}
 <h1>Guestbook</h1>
-<h2>New Post</h2>
-{% load crispy_forms_tags %}
-<form action="" method="post">{% csrf_token %}
-    {{ form | crispy }}
-    <input type="submit" value="Post" />
-</form>
+{% if not posts.has_previous %}
+    <h2>New Post</h2>
+    {% load crispy_forms_tags %}
+    <form action="" method="post">{% csrf_token %}
+        {{ form | crispy }}
+        <input type="submit" value="Post" />
+    </form>
 
-<hr>
+    <hr>
+{% endif %}
 
 <h2>Posts</h2>
 {% autoescape on %}
-{% for post in post_list %}
-<div class="row">
-    <div class="col-md-12">
-        <p><strong>Name:</strong> {{ post.name }}</p>
-        <p><strong>Date:</strong> {{ post.created_at }}</p>
-        <p>{{ post.text }}</p>
+{% for post in posts %}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        Posted by {{ post.name }} at {{ post.created_at}}:
+    </div>
+    <div class="panel-body">
+        {{ post.text }}
     </div>
 </div>
-<hr>
 {% empty %}
-<div class="row">
-    <div class="col-md-12">
-      <em>No posts.</em>
+<div class="panel panel-default">
+    <div class="panel-body">
+        No posts.
     </div>
 </div>
 {% endfor %}
-<p>{{ post_count }} posts.</p>
 {% endautoescape %}
+<nav>
+    <ul class="pager">
+        {% if posts.has_previous %}
+        <li><a href="?page={{ posts.previous_page_number }}">Previous</a></li>
+        {% endif %}
+        <li>Page {{ posts.number }} of {{ posts.paginator.num_pages }}. {{ post_count }} posts in total.</li>
+        {% if posts.has_next %}
+        <li><a href="?page={{ posts.next_page_number }}">Next</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
 {% endblock %}
 
