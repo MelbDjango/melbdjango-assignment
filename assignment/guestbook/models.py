@@ -19,3 +19,15 @@ class Post(models.Model):
 
     class Meta:
         ordering = ('-created_at', )
+
+    def __str__(self):
+        text = self.text
+        if len(self.text) > 30:
+            text = self.text[:30]
+
+        return (
+            'Post created: {}, name: {}, text: {}'
+            ''.format(self.created_at.isoformat(),
+                      self.name,
+                      text)
+        )
