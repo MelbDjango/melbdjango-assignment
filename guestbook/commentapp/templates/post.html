@@ -17,13 +17,16 @@
     </div>
 </div>
 
-<ul class="list-group col-md-9">
-    {% for post in postlist %} 
-    <li class="list-group-item">
-        {{post.pub_date}} | {{post.name}}  | {{post.comment}}
-    </li>
-    <hr>
-    {% endfor %}
+{% for post in postlist %} 
+<div class="media">
+    <div class="media-body">
+        <h4 class="media-heading">{{post.name}} <small><em>said</em> </small></h4>
+        <p>{{post.comment}}</p>
+        <br />
+        <small><em>published {{post.pub_date}}</em> </small>
+</div>
+<hr/>
+{% endfor %}
 {% endblock %}
 
 {% block footer %}
