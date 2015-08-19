@@ -7,9 +7,11 @@ class Record(models.Model):
     class Meta:
         verbose_name_plural = 'records'
 
-    name = models.CharField(max_length=200, default='Your awesome name')
-    comment = models.CharField(max_length =2000)
-    email_address = models.EmailField()
+    DATE_FORMAT = ('you@example.com')
+
+    name = models.CharField(max_length=200)
+    comment = models.CharField(max_length=2000)
+    email_address = models.EmailField(max_length=200, blank=True, help_text=DATE_FORMAT)
     entry_date = models.DateTimeField(default=timezone.now) 
    
     def __str__(self):

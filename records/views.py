@@ -17,3 +17,4 @@ class RecordCreateView(CreateView):
         context = super(RecordCreateView, self).get_context_data(**kwargs)
         context['record_form'] = self.model.objects.all()
         return context
+        
