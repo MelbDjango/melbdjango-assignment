@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="jumbotron">
+  <div class="container">
+    <h1>Welcome to the Guestbook</h1>
+    <p>That's right, I've recreated some authentic 1990s web action. Requires a browser that enthusiastically supports under-construction gifs, blink and marquee tags. Proudly hosted by geocities.</p>
+    <p><a class="btn btn-primary btn-lg" href="{% url "guestbook:post-create-list" %}" role="button">View the Guestbook &raquo;</a></p>
+  </div>
+</div>
+{% endblock %}

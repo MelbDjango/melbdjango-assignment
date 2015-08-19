@@ -22,4 +22,4 @@ Don't forget that we'll need tests for any of the important functionality includ
 
 ----
 
-Doesn't seem to hard, right? Hopefully we could have it all done by Monday August 17th.
+Doesn't seem too hard, right? Hopefully we could have it all done by Monday August 17th.
