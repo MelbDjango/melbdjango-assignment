@@ -1,3 +1,4 @@
+
 ### https://raw.github.com/github/gitignore/408c616ae0ad8f4b8101d8e876b9b67ac6b14059/Python.gitignore
 
 # Byte-compiled / optimized / DLL files
@@ -79,8 +80,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-
-#database
-db.sqlite3
-
-

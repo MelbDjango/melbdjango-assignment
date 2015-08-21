@@ -7,7 +7,7 @@ from .models import Record
 class RecordForm(forms.ModelForm):
     class Meta:
         model = Record
-        fields=('name','comment','email_address')
+        fields=('first_name', 'last_name', 'comment', 'email_address')
 
     # Double check email confirmation
     confirm_email = forms.CharField(max_length=200)
