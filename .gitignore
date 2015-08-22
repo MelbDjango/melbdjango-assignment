@@ -80,3 +80,10 @@ Temporary Items
 .apdisk
 
 
+# Local stuff
+# pycharm support
+/.idea
+
+# database
+db.sqlite3
+
