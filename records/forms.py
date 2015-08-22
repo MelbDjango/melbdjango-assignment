@@ -15,7 +15,7 @@ class RecordForm(forms.ModelForm):
     def clean_comment(self):
         comment = self.cleaned_data['comment']
       
-        if comment == 'test':
+        if comment == 'te':
             msg = 'This is not for testing'
             self.add_error('comment', msg)
 
