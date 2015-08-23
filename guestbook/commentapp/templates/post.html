@@ -30,5 +30,9 @@
 {% endblock %}
 
 {% block footer %}
-<p class="text-muted">{{guestcount}} guests posted on MelbDjango guestbook</p>
+{% if guestcount %}
+    <p class="text-muted">{{guestcount}} {{ guestcount|pluralize:"guest,guests"}} posted on MelbDjango guestbook</p>
+{% else %}
+    <p class="text-muted">Be the first one to sign our guestbook</p>
+{% endif %}
 {% endblock %}
