@@ -1,3 +1,4 @@
+
 """assignment URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
@@ -14,11 +15,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  url(r'^blog/', include(blog_urls))
 """
 from django.conf.urls import include, url
-from django.contrib import admin
 
-from guestbook import urls as guestbook_urls
+from .views import RootRedirectView, Guestbook
 
 urlpatterns = [
-    url(r'^', include(guestbook_urls)),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', RootRedirectView.as_view(), name='homepage'),
+    url(r'^guestbook/', Guestbook.as_view(), name='guestbook'),
 ]
