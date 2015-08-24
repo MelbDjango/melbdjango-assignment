@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+  <div class="form-container">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <div class = "custom-submit">
+        <input type="submit" class="django-submit" name="submit" value="create">
+      </div>
+    </form>
+  </section>
+  
+<section>
+  <article>
+    <div class="comment-container">
+      <ul>
+        {% if record_list %}
+          {% for record in record_list %}
+            <li> First Name: {{ record.first_name}} Last Name {{ record.last_name }}</li>
+              <ul>
+                  <li> Comment: {{ record.comment }}</li>
+                  <li> Posted: ({{ record.entry_date|timesince}})ago </li>
+              </ul>
+            {% endfor %}
+        {% else %}
+          <li> No records </li>
+        {% endif %}
+      </ul>
+    </div>
+  </article>
+</section>
+
+<footer>
+  <div class="message-container">
+    Inbox: {{ record_list|length }} message{{record_list|pluralize}}
+  </div>
+</footer>
+{% endblock %}
