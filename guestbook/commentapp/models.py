@@ -6,7 +6,7 @@ class GuestPost(models.Model):
     email = models.EmailField(blank=True)
     show = models.BooleanField(default=True)
     pub_date = models.DateTimeField(auto_now_add=True)
-    comment = models.TextField(blank=True)
+    comment = models.TextField()
 
     def __str__(self):
         return '{} [{}] - {} {}'.format(self.name, self.email, self.pub_date, self.comment)

@@ -43,7 +43,7 @@ class TestViews(TestCase):
             'comment': self.comment
         }
         response = self.client.post('/', data, follow=True)
-        self.assertContains(response, "Enter a valid email address.")
+        self.assertFormError(response, "form", "email", "Enter a valid email address.")
 
     def test_postCreatedWithDate(self):
         data = {
@@ -53,7 +53,7 @@ class TestViews(TestCase):
         }
         response = self.client.post('/', data, follow=True)
         self.assertRedirects(response, '/thankyou/', 302, 200)
-        recent_post = GuestPost.objects.get(pk=1)
+        recent_post = GuestPost.objects.last()
         self.assertTrue(recent_post.pub_date is not None)
 
     def test_postCreatedFiveDaysAgo(self):
@@ -66,7 +66,7 @@ class TestViews(TestCase):
         self.assertRedirects(response, '/thankyou/', 302, 200)
         response = self.client.get('/')
         self.assertContains(response, 'published Just now')
-        recent_post = GuestPost.objects.get(pk=1)
+        recent_post = GuestPost.objects.last()
         five_days = timedelta(days=5)
         recent_post.pub_date = recent_post.pub_date - five_days
         recent_post.save()
@@ -84,7 +84,7 @@ class TestViews(TestCase):
         response = self.client.get('/')
         self.assertContains(response, self.name)
         self.assertContains(response, self.comment)
-        recent_post = GuestPost.objects.get(pk=1)
+        recent_post = GuestPost.objects.last()
         recent_post.show = False
         recent_post.save()
         response = self.client.get('/')
