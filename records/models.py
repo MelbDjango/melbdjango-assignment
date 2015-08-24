@@ -17,7 +17,7 @@ class Record(models.Model):
     first_name =models.CharField(blank=False, max_length=40, verbose_name ='First Name') 
     last_name = models.CharField(blank=False, max_length=40, verbose_name='Last Name')
     comment = models.CharField(blank=False, max_length=400)
-    email_address = models.EmailField(blank=True, max_length=40, help_text=EMAIL_OPTIONAL)
+    email_address = models.EmailField(blank=True,help_text=EMAIL_OPTIONAL)
     entry_date = models.DateTimeField(default=timezone.now) 
     display = models.BooleanField(default=True, choices=BOOL_CHOICES)
    

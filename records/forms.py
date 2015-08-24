@@ -21,7 +21,11 @@ class RecordForm(forms.ModelForm):
         matched_value = ', '.join([str(m.group(0)) for m in reg.finditer(comment)])
 
         if matched_value:
-            raise forms.ValidationError(mark_safe('Please replace the following errors and try again:<br />' + matched_value))
+            raise forms.ValidationError(mark_safe
+                ('Please replace the following errors and try again:<br />' + 
+                    matched_value))
+            
+        return comment
 
     def clean(self):
         cleaned_data = super(RecordForm, self).clean()

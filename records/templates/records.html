@@ -13,14 +13,17 @@
 {% block comment-container %}
 
   <ul>
-    {% for record in record_list %}
-      <li> {{ record.first_name}} {{ record.last_name }}</li>
-        <ul>
-            <li> {{ record.comment }}</li>
-            <li> ({{ record.entry_date|timesince}}) ago </li>
-        </ul>
+    {% if record_list %}
+      {% for record in record_list %}
+        <li> {{ record.first_name}} {{ record.last_name }}</li>
+          <ul>
+              <li> {{ record.comment }}</li>
+              <li> ({{ record.entry_date|timesince}})ago </li>
+          </ul>
+        {% endfor %}
+
+    {% else %}
+      <li> No records </li>
+    {% endif %}
   </ul>
-    {% endfor %}
-
-
 {% endblock %}
