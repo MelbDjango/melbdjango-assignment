@@ -10,11 +10,10 @@ class RecordCreateView(CreateView):
     model = Record
     template_name = 'records.html'
     form_class = RecordForm
-    context_object_name = 'record_form'
     success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(RecordCreateView, self).get_context_data(**kwargs)
-        context['record_form'] = self.model.objects.all()
+        context['record_list'] = Record.objects.all()
         return context
         
