@@ -13,7 +13,7 @@ def show_it(self, request, queryset):
         message_bit = "%s items were" % rows_updated
     self.message_user(request, "%s successfully displayed at front-end." % message_bit)
 
-#set the display boolean value from records.models to False if the suser 
+#set the display boolean value from records.models to False if the user 
 #selects it from dropdown menu from admin panel
 def hide_it(self, request, queryset):
     rows_updated = queryset.update(display=False)
