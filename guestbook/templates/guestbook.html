@@ -15,18 +15,18 @@
 
     {% for comment in guest_comments %}
         <div class="row">
-            <div class="col">
-                <div class="panel panel-default">
-                    <div class="panel-heading" style="height:40px">
-                        <span class="text-left" style="float: left;">{{ comment.name }}</span>
-                        <span class="text-right" style="float: right;">{{ comment.entrydate|naturaltime }}</span>
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-left">{{ comment.name }}</div>
+                        <div class="col-xs-6 text-right">{{ comment.entrydate|naturaltime }}</div>
                     </div>
-                    {% if comment.comment %}
-                        <div class="panel-body">
-                            {{ comment.comment }}
-                        </div>
-                    {% endif %}
                 </div>
+        {% if comment.comment %}
+                <div class="panel-body">
+                    {{ comment.comment }}
+                </div>
+        {% endif %}
             </div>
         </div>
     {% endfor %}
