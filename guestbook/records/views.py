@@ -1,5 +1,5 @@
 from django.views.generic import CreateView, RedirectView
-from django.core.urlresolvers import reverse
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 
 from .models import Record

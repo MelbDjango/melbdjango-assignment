@@ -1,5 +1,6 @@
-from django.views.generic import CreateView, RedirectView, DetailView
-from django.core.urlresolvers import reverse
+from django.views.generic import (
+    RedirectView, ListView, DetailView, CreateView, UpdateView)
+from django.core.urlresolvers import reverse, reverse_lazy
 from django.http import Http404
 
 from .models import Record
@@ -10,7 +11,7 @@ class RecordCreateView(CreateView):
     model = Record
     template_name = 'records.html'
     form_class = RecordForm
-    success_url = '/'
+    success_url = reverse_lazy('thank-you')
 
     def get_context_data(self, **kwargs):
         context = super(RecordCreateView, self).get_context_data(**kwargs)
@@ -20,6 +21,7 @@ class RecordCreateView(CreateView):
 
 class RecordDetailView(DetailView):
     model = Record
+    template_name = 'record_detail.html'
 
     def get_context_data(self, **kwargs):
          context = super(RecordDetailView, self).get_context_data(**kwargs)
