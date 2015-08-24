@@ -17,14 +17,14 @@ class RecordForm(forms.ModelForm):
     def clean_comment(self): 
         comment = self.cleaned_data['comment']     
         filter_list = ['Lose weight','100% free','Dear Friend']
-        reg = re.compile(r'([a-z])\1{2,}' + '|' + '|'.join(filter_list),re.IGNORECASE)
+        reg = re.compile(r'([a-z])\1{2,}' + '|' + '|'.join(filter_list), re.IGNORECASE)
         matched_value = ', '.join([str(m.group(0)) for m in reg.finditer(comment)])
 
         if matched_value:
             raise forms.ValidationError(mark_safe
                 ('Please replace the following errors and try again:<br />' + 
                     matched_value))
-            
+
         return comment
 
     def clean(self):
