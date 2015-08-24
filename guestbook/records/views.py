@@ -9,7 +9,6 @@ class RecordCreateView(CreateView):
     model = Record
     template_name = 'records.html'
     form_class = RecordForm
-    context_object_name = 'record_list'
     success_url = '/'
 
     def get_context_data(self, **kwargs):

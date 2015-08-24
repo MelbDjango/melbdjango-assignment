@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Example Django Form!</title>
-  </head>
-  <body>
-    <form method="POST">
-      {{ form.as_p }}
+{% extends "base.html" %}
+
+{% block title %}Guest Book{% endblock %}  
+
+{% block content %} 
+    <form method="post">
       {% csrf_token %}
-      <input type="submit" value="Say Hello">
+      {{ form.as_p }}
+      <input type="submit" name="submit" value="create">
     </form>
-  </body>
-</html>
+{% endblock %}
