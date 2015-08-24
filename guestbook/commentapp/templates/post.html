@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="page-header">
+    <h2>MelbDjango Guestbook</h2>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"> Sign Guestbook</h3>
+    </div>
+    <div class="panel-body">
+        <form method="POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="btn btn-primary" type="submit" name="submit" value="Submit">
+        </form>
+    </div>
+</div>
+
+{% for post in postlist %} 
+<div class="media">
+    <div class="media-body">
+        <h4 class="media-heading">{{post.name}} <small><em>said</em> </small></h4>
+        <p>{{post.comment}}</p>
+        <br />
+        <small><em>published {{post.pub_date}}</em> </small>
+</div>
+<hr/>
+{% endfor %}
+{% endblock %}
+
+{% block footer %}
+{% if guestcount %}
+    <p class="text-muted">{{guestcount}} {{ guestcount|pluralize:"guest,guests"}} posted on MelbDjango guestbook</p>
+{% else %}
+    <p class="text-muted">Be the first one to sign our guestbook</p>
+{% endif %}
+{% endblock %}

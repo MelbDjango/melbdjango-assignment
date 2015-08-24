@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron">
+    <h1>You are awesome!</h1> 
+    <p>Thank you for dropping by. We appreciate for taking time to sign our guest book.</p>
+    <p>Stay awesome from the <strong>MelbDjango Team</strong>.</p>
+    <a class="btn btn-lg btn-primary" role="button" href="{% url 'guest-book' %}">Go Back</a>
+    </div>
+</div>
+{% endblock %}
