@@ -1,0 +1,46 @@
+[
+{
+    "fields": {
+        "hidden": false,
+        "name": "Joe Bloggs",
+        "comment": "",
+        "email": "joe@bloggs.net",
+        "entrydate": "2015-08-03T18:06:37.999Z"
+    },
+    "model": "guestbook.guestcomment",
+    "pk": 1
+},
+{
+    "fields": {
+        "hidden": false,
+        "name": "Jane Citizen",
+        "comment": "Love your site!",
+        "email": "jane@anywhere.net",
+        "entrydate": "2015-08-10T15:32:09.938Z"
+    },
+    "model": "guestbook.guestcomment",
+    "pk": 2
+},
+{
+    "fields": {
+        "hidden": true,
+        "name": "David Nugent",
+        "comment": "Test comment entered just for the fun of it",
+        "email": "davidn@uniquode.io",
+        "entrydate": "2015-08-05T22:28:37.244Z"
+    },
+    "model": "guestbook.guestcomment",
+    "pk": 3
+},
+{
+    "fields": {
+        "hidden": false,
+        "name": "John Doe",
+        "comment": "Let's see how this looks as I add more elements\r\nAnd let's try <strong>multiline comments</strong> and attempting to embed html as well.",
+        "email": "john@doe.net",
+        "entrydate": "2015-08-09T03:36:41.686Z"
+    },
+    "model": "guestbook.guestcomment",
+    "pk": 4
+}
+]
