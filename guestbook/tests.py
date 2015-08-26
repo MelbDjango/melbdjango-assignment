@@ -1,6 +1,8 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 # Create your tests here.
+from .forms import GuestbookForm
 
 
 class GuestbookViewTestCase(TestCase):
@@ -17,7 +19,7 @@ class GuestbookViewTestCase(TestCase):
         """
         Check the guestbook list:
             - guest_comments is in our context and contains only ßnon-hidden comments
-            - check a couple of non-hidswn entries to ensure the data is there
+            - check a couple of non-hiden entries to ensure the data is there
         """
         response = self.client.get('/guestbook/')
         self.assertTrue(response.status_code, 200)
@@ -33,6 +35,8 @@ class GuestbookViewTestCase(TestCase):
                 self.assertEqual(comment.name, "John Doe")
                 self.assertEqual(comment.email, "john@doe.net")
                 self.assertTrue(comment.comment)
+        self.assertTrue('entries' in response.context)
+        self.assertEqual(response.context['entries'], 4)
 
     def test_404(self):
         """
@@ -41,3 +45,75 @@ class GuestbookViewTestCase(TestCase):
         """
         response = self.client.get('/this-does-not-exist/')
         self.assertTrue(response.status_code, 404)
+
+    good = [
+        {
+            'email': 'test@test.com',
+            'name': 'Test User 1',
+        },
+        {
+            'email': 'test2@test.com',
+            'name': 'Test User 2',
+            'comment': 'Love your site, thanks!',
+        },
+    ]
+
+    def test_guestbook_entry_good(self):
+        """
+        First, check a good post via request
+        """
+        added = 0
+        for good in self.good:
+            response = self.client.post('/guestbook/', good)
+            # ensure we get back a redirect
+            self.assertEqual(response.status_code, 302)
+            response = self.client.get('/guestbook/')
+            self.assertEqual(response.status_code, 200)
+            added += 1
+            # make sure one was added
+            self.assertEqual(len(response.context['guest_comments']), 3 + added)
+
+    def test_guestbook_form_good(self):
+        """
+        Check the form directly for validation
+        """
+        for good in self.good:
+            form = GuestbookForm(good)
+            comment = form.save()
+            self.assertTrue(form.is_valid())
+            self.assertEqual(comment.email, good['email'])
+            self.assertEqual(comment.name, good['name'])
+            if 'comment' in good:
+                self.assertEqual(comment.comment, good['comment'])
+            else:
+                self.assertFalse(comment.comment)
+
+    bad = [
+        {
+            # empty
+        },
+        {
+            'email': 'not-valid',
+            'name': 'Who cares',
+        },
+        {
+            'email': 'lookslike@an.eml',
+        },
+        {
+            'name': 'No email',
+        },
+    ]
+
+    def test_guestbook_entry_bad(self):
+        """
+        Now, check some bad ones
+        """
+        for bad in self.bad:
+            form = GuestbookForm(bad)
+            try:
+                comment = form.save()
+            except (ValueError, ValidationError):
+                pass
+            finally:
+                self.assertFalse(form.is_valid())
+
