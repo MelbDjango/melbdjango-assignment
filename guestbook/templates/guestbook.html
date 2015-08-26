@@ -1,0 +1,43 @@
+{% extends 'guestbook_base.html' %}
+{% load humanize %}
+{%  block title %}Guestbook{% endblock %}
+
+{% block header %}
+    <div class="header-template">
+        <h1>Guest Book</h1>
+        <p class="lead">Welcome! Feel free to leave your email address and an optional comment here.</p>
+    </div>
+{% endblock %}
+
+{%  block content %}
+
+    {% include 'snippets/guestbook_form.html' with form_title="New Guestbook Entry" form_submit_label="Create" %}
+
+    {% for comment in guest_comments %}
+        <div class="row">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-xs-6 text-left">{{ comment.name }}</div>
+                        <div class="col-xs-6 text-right">{{ comment.entrydate|naturaltime }}</div>
+                    </div>
+                </div>
+        {% if comment.comment %}
+                <div class="panel-body">
+                    {{ comment.comment }}
+                </div>
+        {% endif %}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block stats %}
+    {% if entries %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p class="text-center">{{ entries }} guest{% if entry != '1' %}s{% endif %} signed our guest book!</p>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
