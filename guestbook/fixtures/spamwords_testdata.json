@@ -1,0 +1,26 @@
+[
+{
+    "pk": 1,
+    "model": "guestbook.spamword",
+    "fields": {
+        "reject": false,
+        "spam": "lose weight"
+    }
+},
+{
+    "pk": 2,
+    "model": "guestbook.spamword",
+    "fields": {
+        "reject": false,
+        "spam": "dear friend"
+    }
+},
+{
+    "pk": 3,
+    "model": "guestbook.spamword",
+    "fields": {
+        "reject": true,
+        "spam": "earn $"
+    }
+}
+]

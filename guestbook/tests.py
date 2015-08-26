@@ -6,7 +6,7 @@ from .forms import GuestbookForm
 
 
 class GuestbookViewTestCase(TestCase):
-    fixtures = ['guestbook_views_testdata.json']
+    fixtures = ['guestbook_views_testdata.json', 'spamwords_testdata.json']
 
     def test_redirect(self):
         """
@@ -112,8 +112,40 @@ class GuestbookViewTestCase(TestCase):
             form = GuestbookForm(bad)
             try:
                 comment = form.save()
-            except (ValueError, ValidationError):
+            except ValueError:
                 pass
             finally:
                 self.assertFalse(form.is_valid())
 
+    comments = [
+        { # contains spam, should not validate
+            'email': 'test@test.me',
+            'name': 'Some Dude',
+            'comment': 'EARN $$$ NOW! Just call me at 555 5555 5555!'
+        },
+        { # does not contain spam
+            'email': 'bad@manners.always',
+            'name': 'Bad Manners',
+            'comment': 'Surprisingly, this should pass...'
+        },
+        { # contains spam, will validate but will be hidden
+            'email': 'dear@friend.net',
+            'name': 'Dear Friend',
+            'comment': 'Dear Friend, if you would like to take up our offer right now, call on 555 5555 5555'
+        }
+    ]
+
+    def test_bad_words(self):
+        """
+        Check comment validation for bad words
+        Expected: 1=passes (but hidden), 2=passes, 3=fails
+        """
+        for index, comment in enumerate(self.comments):
+            form = GuestbookForm(comment)
+            try:
+                result = form.save()
+                self.assertTrue(index!=0 or result.hidden, msg='Comment not hidden when it should be')
+                continue
+            except ValueError:
+                pass
+            self.assertNotEqual(index, 1, msg='Comment does not validate when it should')
