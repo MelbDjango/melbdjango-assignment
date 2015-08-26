@@ -23,3 +23,15 @@ class GuestComment(models.Model):
                 self.entrydate.strftime("%Y-%m-%d %H:%M"),
                 self.email, self.name,
                 self.comment.replace("\n", " "))
+
+
+class SpamWord(models.Model):
+    """
+    Words and phrases that may indicate spam/profanity
+    """
+    spam = models.CharField(max_length=254)
+    # Fail validation on this word/phrase rather than just hide
+    reject = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.spam
