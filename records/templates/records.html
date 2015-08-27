@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section>
+  <div class="form-container">
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+        <input type="submit" id="submit-button" name="guestbook-submit" value="submit">
+    </form>
+  </section>
+
+
+<section>
+  <div class="comment-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Comments</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if record_list %}
+            {% for record in record_list %}
+              {% if record.display %}<!--Control through Hide it or show it choices from back-end-->
+                <article>
+                    <tr>
+                      <td class="for-comment">{{ record.comment }}</td>
+                    </tr>
+                    <tr>
+                      <td><label>Posted by: </label><a href="{% url 'record-detail' pk=record.pk %}"> {{ record.first_name}}  {{ record.last_name }}</a>, <span class="for-date"> {{ record.entry_date|timesince}} ago</span></td>
+                    </tr>
+                    <tr>
+                      <td><span class="for-email">{{ record.email_address}}</span></td>
+                    </tr>
+                    <tr>
+                      <td class="empty-col"><td>
+                    </tr>
+                </article>
+                {% endif %}
+              {% endfor %}
+            {% else %}
+              <tr>
+                <td> No recent comments </td>
+              </tr>
+          {% endif %}
+        </tbody>
+      </table>
+  </div>
+</section>
+
+<footer>
+  <div class="message-container">
+    Inbox: {{ record_list|length }} message{{record_list|pluralize}}
+  </div>
+</footer>
+{% endblock %}
