@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}Recrod detail{% endblock %}  
+
+
+{% block content %}
+<section>
+    <div id="detail-container">
+      <div>
+         <ul>
+            <li class="for-comment">{{ object.comment }}</li>
+            <li><label>Posted by: </label><span class="for-name">{{ record.first_name}}  {{ record.last_name }}</span>, <span class="for-date"> {{ record.entry_date|timesince}} ago</span></li>
+            <li><span class="for-email">{{ record.email_address}}</span></li>
+        </ul>
+      </div>
+      
+      <div class="back">
+          <a href="{% url 'record-list' %}">
+          <p>&lt;&lt;Back</p></a> 
+      </div>
+    <div>
+</section>
+{% endblock %}

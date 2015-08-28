@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>{% block title %}Guest Book{% endblock %}</title>
+
+        {% load staticfiles %}
+        <style>
+            body {
+                background-image: url("{% static "records/tomraider.jpg" %}");
+                margin: 0px;
+                padding: 0px;
+                font-size: 1em ;
+                color: #FFFFFF;
+                font-family: serif;
+            }
+            .header-container {
+                height: 50px;   
+            }
+            .form-container {
+                position:relative;
+                width: 400px;
+                height: 60vh;
+                float: left;
+                border: 5px ridge #A9A9A9;
+                margin-left: 15%; 
+                margin-top: 5%;
+                overflow-y: auto;  
+            }
+            .form-container p {
+                font-size: 1.1em;
+                font-weight: bold;
+                color: #66FFFF;
+            }
+            .comment-container {
+                postion:relative;
+                width: 400px;
+                height: 80vh;
+                float:right;
+                margin-right:15%;
+                overflow-y: auto;
+            }
+            #detail-container {
+                position: absolute;
+                top: 30%;
+                word-wrap: break-word;
+                width: 358px;
+            }
+            .message-container {
+                width: 185px;
+                background-color: black;
+                height: 50px;
+                clear: both;
+            }
+            .thank-you {
+                position: fixed;
+                top: 15%;
+                left: 25%;
+                font-size: 3em;
+            }
+            .thank-you-image {
+                position: absolute;
+                left: 25%;
+            }
+            .thank-you-baby  {
+                width: 5px;
+                height: 5px;
+            }
+            input[type="text"], textarea {
+                border-radius: 0;
+                background-color : yellow; 
+                resize: none;
+                overflow: auto;
+            }
+            input[type="email"] {
+                border-radius: 0;
+                background-color: yellow;   
+            }
+            input[type=submit]{
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                appearance: none;
+                position: absolute;
+                left: 40%;
+                width: 80px;
+                height: 30px;
+            }
+            table, th, td, tr {
+                border: 5px ridge #A9A9A9;
+                table-layout: fixed;
+                word-wrap: break-word;
+                width: 358px;
+            } 
+            th {
+                font-size: 1.6em;
+                color: #66FFFF;;
+            }
+             td label {
+                color: white;
+            }
+            .empty-col {
+                border: 5px dashed blue;
+            }
+            .for-comment {
+                color: #FF3300;
+            }
+            .for-name {
+                color: red;
+            }
+            .for-date {
+                color: green;
+            } 
+            .for-email {
+                color: orange;
+            }
+
+            .for-name {
+                color: blue;
+            }
+            #dancing-baby {
+                float: right;
+                margin-right: 20%;
+                margin-top: 12%;
+            }
+            #lara {
+                float: left;
+                margin-left: 20%;
+            }
+            #header-container p {
+                background-color: black;
+                width: 120px;
+                margin: 0px;
+                padding: 0px;        
+            }
+
+            #header-container p:first-child {
+                font-size: 3em;
+                font-weight: bold;
+            }
+            .logo {
+                color:white;
+                font-size: 1.1em;
+                font-weight: bold;
+            }
+            #moto{
+                font-size: 1.3em;
+                font-style: italic;
+                color: #FF3300;
+            }
+            .errorlist {
+                color: red;
+            }
+    </style>
+    </head>
+    <body>
+
+        <div id="header-container"></p>
+            <p><span class="logo">TOMB</span></p>
+            <p><span class="logo">RAIDER</span></p>
+            <p><span id="moto">Guestbook</span></p>
+        </div>
+        
+        {% block content %}{% endblock %}
+    </body>
