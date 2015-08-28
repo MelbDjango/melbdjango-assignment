@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% load staticfiles %}
+
+<section>
+ <div class="back">
+    <a href="{% url 'record-list' %}">
+    <p><span class="back">&lt;&lt;Back</span></p></a> 
+</div>
+
+<div class="thank-you">
+    <h2>Thank you</h2>
+    <div>
+        <div id="dancing-baby">
+            <img src="{% static "records/thanks_baby.gif" %}" alt="dancing_meme" height="150px" width="150px"> 
+        </div>
+
+        <div id="lara">
+            <img src="{% static "records/lara.jpg" %}" alt="confused_Lara" height="200px" width="100px"> 
+        <div>
+    </div>
+</div>
+</section>
+{% endblock %} 
